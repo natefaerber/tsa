@@ -103,9 +103,9 @@ commit-msg:
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer os.Remove(f.Name())
-	f.WriteString(content)
-	f.Close()
+	defer func() { _ = os.Remove(f.Name()) }()
+	_, _ = f.WriteString(content)
+	_ = f.Close()
 
 	flagConfig = f.Name()
 	cfg, err := loadConfig()
@@ -130,9 +130,9 @@ func TestLoadConfigInvalidYAML(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer os.Remove(f.Name())
-	f.WriteString("commit-msg:\n  strip-attribution:\n    patterns: not-a-list\n")
-	f.Close()
+	defer func() { _ = os.Remove(f.Name()) }()
+	_, _ = f.WriteString("commit-msg:\n  strip-attribution:\n    patterns: not-a-list\n")
+	_ = f.Close()
 
 	flagConfig = f.Name()
 	_, err = loadConfig()

@@ -78,11 +78,11 @@ func TestRunStepsSkipPrintsMessage(t *testing.T) {
 	}
 	_ = RunSteps(steps, []string{"a"}, nil, false)
 
-	w.Close()
+	_ = w.Close()
 	os.Stderr = old
 
 	var buf bytes.Buffer
-	buf.ReadFrom(r)
+	_, _ = buf.ReadFrom(r)
 	if got := buf.String(); got != "skipping a\n" {
 		t.Errorf("expected 'skipping a\\n', got %q", got)
 	}
@@ -98,11 +98,11 @@ func TestRunStepsQuietSuppressesMessage(t *testing.T) {
 	}
 	_ = RunSteps(steps, []string{"a"}, nil, true)
 
-	w.Close()
+	_ = w.Close()
 	os.Stderr = old
 
 	var buf bytes.Buffer
-	buf.ReadFrom(r)
+	_, _ = buf.ReadFrom(r)
 	if got := buf.String(); got != "" {
 		t.Errorf("expected no output, got %q", got)
 	}
