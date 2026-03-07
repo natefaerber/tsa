@@ -1,0 +1,19 @@
+amends "package://github.com/jdx/hk/releases/download/v1.37.0/hk@1.37.0#/Config.pkl"
+
+hooks {
+  ["pre-commit"] {
+    steps {
+      ["tsa-nocommit"] {
+        check = "tsa pre-commit {{files}}"
+        glob = List("*")
+      }
+    }
+  }
+  ["commit-msg"] {
+    steps {
+      ["tsa-commit-msg"] {
+        check = "tsa commit-msg .git/COMMIT_EDITMSG"
+      }
+    }
+  }
+}
