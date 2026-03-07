@@ -7,14 +7,14 @@ import (
 	"regexp"
 	"strings"
 
-	"gopkg.in/yaml.v3"
+	"github.com/goccy/go-yaml"
 )
 
 // Pattern represents a single match rule for filtering lines.
 type Pattern struct {
-	Text            string `yaml:"text"`
-	Regex           string `yaml:"regex"`
-	CaseInsensitive bool   `yaml:"case_insensitive"`
+	Text            string `yaml:"text" json:"text,omitempty"`
+	Regex           string `yaml:"regex,omitempty" json:"regex,omitempty"`
+	CaseInsensitive bool   `yaml:"case_insensitive,omitempty" json:"case_insensitive,omitempty"`
 }
 
 // CommitMsgConfig holds configuration for the commit-msg stage.
