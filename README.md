@@ -7,14 +7,14 @@ Personal git hook utilities. Screens your commits before they're allowed through
 ### mise
 
 ```bash
-mise use ubi:natefaerber/tsa
+mise use github:natefaerber/tsa
 ```
 
 Or add to your `.mise.toml`:
 
 ```toml
 [tools]
-"ubi:natefaerber/tsa" = "latest"
+"github:natefaerber/tsa" = "latest"
 ```
 
 ### go install
