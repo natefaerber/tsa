@@ -2,4 +2,3 @@
 go = "1.25"
 hk = "1.37.0"
 pkl = "0.31.0"
-"github:natefaerber/tsa" = "0.1.1"
