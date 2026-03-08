@@ -53,7 +53,41 @@ commit-msg  Clean up commit messages
 
 ## Usage
 
-### As git hooks
+### With hk (recommended)
+
+[hk](https://hk.jdx.dev) is a fast git hook manager. Add tsa to your global hk config (`~/.config/hk/config.pkl`) to run it in every repo:
+
+```pkl
+amends "package://github.com/jdx/hk/releases/download/v1.37.0/hk@1.37.0#/Config.pkl"
+
+hooks {
+  ["pre-commit"] {
+    steps {
+      ["tsa-nocommit"] {
+        check = "tsa pre-commit {{files}}"
+        glob = List("*")
+      }
+    }
+  }
+  ["commit-msg"] {
+    steps {
+      ["tsa-commit-msg"] {
+        check = "tsa commit-msg {{commit_msg_file}}"
+      }
+    }
+  }
+}
+```
+
+Or add it per-repo in an `hk.pkl` at the project root.
+
+To skip tsa steps in a specific repo (e.g. if the repo has its own hook config):
+
+```bash
+git config --local hk.skipSteps "tsa-nocommit,tsa-commit-msg"
+```
+
+### As git hooks (manual)
 
 Add to your git hooks (e.g. `.git/hooks/pre-commit`):
 
